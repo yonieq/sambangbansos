@@ -1,0 +1,49 @@
+{% extends 'management/base.html' %}
+{% load static %}
+
+{% block pagetitle %}
+    Master Kecamatan
+{% endblock %}
+
+{% block pagelink %}
+    <li class="breadcrumb-item"><a href="{% url 'ManagementDashboard' %}">Home</a></li>
+    <li class="breadcrumb-item active">Master Kecamatan</li>
+{% endblock %}
+
+{% block bodycontent %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="dataTable" class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>Kecamatan</th>
+                                <th>Kode</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for kecamatan in list %}
+                                <tr>
+                                    <td>{{ kecamatan.Nama }}</td>
+                                    <td>{{ kecamatan.Kode }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block jsfooter %}
+    <script src="{% static "/assets/plugins/datatables/jquery.dataTables.min.js" %}"></script>
+    <script>
+        $(document).ready(function () {
+            $('#dataTable').DataTable();
+        });
+    </script>
+{% endblock %}

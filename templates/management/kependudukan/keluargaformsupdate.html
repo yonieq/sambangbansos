@@ -1,0 +1,47 @@
+{% extends 'management/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block cssheader %}
+    <!-- Date picker plugins css -->
+    <link href="{% static "/assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" %}" rel="stylesheet"
+          type="text/css"/>
+{% endblock %}
+
+{% block pagetitle %}
+    Data Keluarga
+{% endblock %}
+
+{% block pagelink %}
+    <li class="breadcrumb-item"><a href="{% url 'ManagementDashboard' %}">Home</a></li>
+    <li class="breadcrumb-item active"><a href="{% url 'KependudukanKeluargaList' %}">Warga</a></li>
+    <li class="breadcrumb-item active">Form</li>
+{% endblock %}
+
+{% block bodycontent %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <form action="{% url 'KependudukanKeluargaFormsUpdate' keluarga.id %}" method="POST">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                         <button type="submit" class="btn btn-primary">Ubah Data Keluarga</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block jsfooter %}
+    <!-- Date Picker Plugin JavaScript -->
+    <script src="{% static "/assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js" %}"></script>
+    <script>
+        jQuery('#id_TglLahir').datepicker({
+            format: 'yyyy-mm-dd',
+            autoclose: true,
+            todayHighlight: true
+        });
+    </script>
+{% endblock %}

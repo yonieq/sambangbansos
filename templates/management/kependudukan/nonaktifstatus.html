@@ -1,0 +1,61 @@
+{% extends 'management/base.html' %}
+{% load static %}
+
+{% block cssheader %}
+    <link href="{% static "/assets/plugins/toast-master/css/jquery.toast.css" %}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block pagetitle %}
+    Data Warga
+{% endblock %}
+
+{% block pagelink %}
+    <li class="breadcrumb-item"><a href="{% url 'ManagementDashboard' %}">Home</a></li>
+    <li class="breadcrumb-item active">Warga</li>
+{% endblock %}
+
+{% block bodycontent %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <div class="form-group row">
+                            <label for="example-text-input" class="col-2 col-form-label">NIK</label>
+                            <div class="col-10">
+                                {{ form.Nik }}
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="example-text-input" class="col-2 col-form-label">Nama</label>
+                            <div class="col-10">
+                                {{ form.Nama }}
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="example-text-input" class="col-2 col-form-label">Alamat</label>
+                            <div class="col-10">
+                                {{ form.Alamat }}
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="example-text-input" class="col-2 col-form-label">Status NIK</label>
+                            <div class="col-10">
+                                {{ form.Status }}
+                            </div>
+                        </div>
+                        <div class="offset-sm-2 col-sm-10">
+                            <button type="submit" class="btn btn-info waves-effect waves-light m-t-10">Submit</button>
+{#                            <button type="cancel" class="btn btn-warning waves-effect waves-light m-t-10">Cancel</button>#}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block jsfooter %}
+
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'management/base.html' %}
+{% load static %}
+
+{% block pagetitle %}
+    Detail Penerimaan Bantuan
+{% endblock %}
+
+{% block pagelink %}
+    <li class="breadcrumb-item"><a href="{% url 'ManagementDashboard' %}">Home</a></li>
+    <li class="breadcrumb-item active"><a href="{% url 'DataBantuanPenerima' %}">Penerima Bantuan</a></li>
+    <li class="breadcrumb-item active">Detail</li>
+{% endblock %}
+
+{% block bodycontent %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="dataTable" class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>Nomer KK</th>
+                                <th>Alamat</th>
+                                <th>Rt</th>
+                                <th>Rw</th>
+                                <th>Desa</th>
+                                <th>Bantuan</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for bantuan in list %}
+                                <tr>
+                                    <td>{{ bantuan.Keluarga.NomerKK }}</td>
+                                    <td>{{ bantuan.Keluarga.Alamat }}</td>
+                                    <td>{{ bantuan.Keluarga.Rt }}</td>
+                                    <td>{{ bantuan.Keluarga.Rw }}</td>
+                                    <td>{{ bantuan.Keluarga.Desa.Nama }}</td>
+                                    <td>{{ bantuan.Bantuan.Nama }}</td>
+                                    <td>
+                                        <a href="{% url 'DataBantuanDetailDelete' bantuan.id %}" data-toggle="tooltip"
+                                           data-original-title="Delete"> <i class="fa fa-close text-danger"></i> </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block jsfooter %}
+    <script src="{% static "/assets/plugins/datatables/jquery.dataTables.min.js" %}"></script>
+    <script>
+        $(document).ready(function () {
+            $('#dataTable').DataTable();
+        });
+    </script>
+{% endblock %}

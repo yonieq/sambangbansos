@@ -1,0 +1,51 @@
+{% extends 'management/base.html' %}
+{% load static %}
+
+{% block pagetitle %}
+    Master Desa
+{% endblock %}
+
+{% block pagelink %}
+    <li class="breadcrumb-item"><a href="{% url 'ManagementDashboard' %}">Home</a></li>
+    <li class="breadcrumb-item active">Master Desa</li>
+{% endblock %}
+
+{% block bodycontent %}
+     <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+    <div class="table-responsive">
+        <table id="dataTable" class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>Desa</th>
+                <th>Kode</th>
+                <th>Kecamatan</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for desa in list %}
+                <tr>
+                    <td>{{desa.Nama}}</td>
+                    <td>{{desa.Kode}}</td>
+                    <td>{{desa.Kecamatan.Nama}}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+     </div>
+                        </div>
+                    </div>
+                </div>
+{% endblock %}
+
+{% block jsfooter %}
+    <script src="{% static "/assets/plugins/datatables/jquery.dataTables.min.js" %}"></script>
+    <script>
+    $(document).ready(function() {
+        $('#dataTable').DataTable();
+    });
+    </script>
+{% endblock %}

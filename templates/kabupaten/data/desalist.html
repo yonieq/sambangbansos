@@ -1,0 +1,71 @@
+{% extends 'kabupaten/base.html' %}
+{% load static %}
+
+{% block pagetitle %}
+    Profile Data NIK Non Aktif per Desa
+{% endblock %}
+
+{% block pagelink %}
+    <li class="breadcrumb-item"><a href="{% url 'KabupatenDashboard' %}">Home</a></li>
+    <li class="breadcrumb-item active">Pencarian</li>
+{% endblock %}
+
+{% block bodycontent %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive m-t-40">
+                        <table id="dataTable" class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Kode</th>
+                                <th>Nama</th>
+                                <th>kecamatan</th>
+                                <th>Aktif</th>
+                                <th>Non Aktif</th>
+                                <th>Total</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for desa in list %}
+                                <tr>
+                                    <td>{{ desa.No }}</td>
+                                    <td>{{ desa.Kode }}</td>
+                                    <td>{{ desa.Nama }}</td>
+                                    <td>{{ desa.Kecamatan }}</td>
+                                    <td>{{ desa.Valid }}</td>
+                                    <td>{{ desa.Invalid }}</td>
+                                    <td>{{ desa.Total }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block jsfooter %}
+    <script src="{% static "/assets/plugins/datatables/jquery.dataTables.min.js" %}"></script>
+    <script src="{% static "/assets/plugins/datatables/button-export/dataTables.buttons.min.js" %}"></script>
+    <script src="{% static "/assets/plugins/datatables/button-export/buttons.flash.min.js" %}"></script>
+    <script src="{% static "/assets/plugins/datatables/button-export/jszip.min.js" %}"></script>
+    <script src="{% static "/assets/plugins/datatables/button-export/pdfmake.min.js" %}"></script>
+    <script src="{% static "/assets/plugins/datatables/button-export/vfs_fonts.js" %}"></script>
+    <script src="{% static "/assets/plugins/datatables/button-export/buttons.html5.min.js" %}"></script>
+    <script src="{% static "/assets/plugins/datatables/button-export/buttons.print.min.js" %}"></script>
+    <script>
+        $(document).ready(function () {
+            $('#dataTable').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
+            });
+        });
+    </script>
+{% endblock %}

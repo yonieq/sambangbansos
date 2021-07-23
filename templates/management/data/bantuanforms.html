@@ -1,0 +1,43 @@
+{% extends 'management/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block cssheader %}
+{% endblock %}
+
+{% block pagetitle %}
+    Data Keluarga
+{% endblock %}
+
+{% block pagelink %}
+    <li class="breadcrumb-item"><a href="{% url 'ManagementDashboard' %}">Home</a></li>
+    <li class="breadcrumb-item active"><a href="{% url 'KependudukanWargaList' %}">Bantuan</a></li>
+    <li class="breadcrumb-item active">Form</li>
+{% endblock %}
+
+{% block bodycontent %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <form action="" method="POST">
+                        {% crispy form %}
+                        <button type="submit" value="submit" class="btn btn-primary">Tambah Bantuan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block jsfooter %}
+    <!-- Date Picker Plugin JavaScript -->
+    <script src="{% static "/assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js" %}"></script>
+    <script>
+        jQuery('#id_TglLahir').datepicker({
+            format: 'yyyy-mm-dd',
+            autoclose: true,
+            todayHighlight: true
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,96 @@
+{% extends 'management/base.html' %}
+{% load static %}
+
+{% block pagetitle %}
+    Data Penerima Bantuan
+{% endblock %}
+
+{% block pagelink %}
+    <li class="breadcrumb-item"><a href="{% url 'ManagementDashboard' %}">Home</a></li>
+    <li class="breadcrumb-item active">Penerima Bantuan</li>
+{% endblock %}
+
+{% block bodycontent %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="dataTable" class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>NoKTP</th>
+                                <th>NoKK</th>
+                                <th>Nama</th>
+                                <th>Tempat Lahir</th>
+                                <th>Tanggal Lahir</th>
+                                <th>Alamat</th>
+                                <th>Rt</th>
+                                <th>Rw</th>
+                                <th>Kode Desa</th>
+                                <th>Kode Kecamatan</th>
+                                <th>PKH</th>
+                                <th>BPNT</th>
+                                <th>BST PUSAT</th>
+                                <th>PERLUASAN SEMBAKO</th>
+                                <th>JPS</th>
+                                <th>BST KABUPATEN</th>
+                                <th>BLT DD</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for warga in list %}
+                                <tr>
+                                    <td>{{ warga.No }}</td>
+                                    <td>{{ warga.Nik }}</td>
+                                    <td>{{ warga.NomerKK }}</td>
+                                    <td>{{ warga.Nama }}</td>
+                                    <td>{{ warga.TmpLahir }}</td>
+                                    <td>{{ warga.TglLahir }}</td>
+                                    <td>{{ warga.Alamat }}</td>
+                                    <td>{{ warga.Rt }}</td>
+                                    <td>{{ warga.Rw }}</td>
+                                    <td>{{ warga.KodeDesa }}</td>
+                                    <td>{{ warga.KodeKecamatan }}</td>
+                                    <td>{{ warga.PKH }}</td>
+                                    <td>{{ warga.BPNT }}</td>
+                                    <td>{{ warga.BSTP }}</td>
+                                    <td>{{ warga.Sembako }}</td>
+                                    <td>{{ warga.JPS }}</td>
+                                    <td>{{ warga.BSTKab }}</td>
+                                    <td>{{ warga.BltDd }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block jsfooter %}
+    <script src="{% static "/assets/plugins/datatables/jquery.dataTables.min.js" %}"></script>
+    <script src="{% static "/assets/plugins/datatables/button-export/dataTables.buttons.min.js" %}"></script>
+    <script src="{% static "/assets/plugins/datatables/button-export/buttons.flash.min.js" %}"></script>
+    <script src="{% static "/assets/plugins/datatables/button-export/jszip.min.js" %}"></script>
+    <script src="{% static "/assets/plugins/datatables/button-export/pdfmake.min.js" %}"></script>
+    <script src="{% static "/assets/plugins/datatables/button-export/vfs_fonts.js" %}"></script>
+    <script src="{% static "/assets/plugins/datatables/button-export/buttons.html5.min.js" %}"></script>
+    <script src="{% static "/assets/plugins/datatables/button-export/buttons.print.min.js" %}"></script>
+
+    <script>
+        $(document).ready(function () {
+            //$('#dataTable').DataTable();
+            const groupColumn = 0;
+            $('#dataTable').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
+            });
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,94 @@
+{% extends 'management/base.html' %}
+{% load static %}
+
+{% block pagetitle %}
+    Dashboard
+{% endblock %}
+
+{% block pagelink %}
+    <li class="breadcrumb-item"><a href="{% url 'ManagementDashboard' %}">Home</a></li>
+    <li class="breadcrumb-item active">Dashboard</li>
+{% endblock %}
+
+{% block bodycontent %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="comment-widgets m-b-20">
+                        <!-- Comment Row -->
+                        <div class="d-flex flex-row comment-row">
+                            <div class="p-2"><span class="round"><img
+                                    src="{% static '/assets/images/administrator.png' %}" alt="user"
+                                    width="50"></span>
+                            </div>
+                            <div class="comment-text w-100">
+                                <h5>Administrator</h5>
+                                <div class="comment-footer">
+                                    <span class="date">05 Agustus 2020</span>
+                                    <span class="label label-success">Approved</span>
+                                </div>
+                                <p class="m-b-5 m-t-10">
+                                    Penambahan submenu Check NIK Aktif pada menu Kependudukan
+                                </p>
+                            </div>
+                        </div>
+                        <!-- Comment Row -->
+                        <div class="d-flex flex-row comment-row">
+                            <div class="p-2"><span class="round"><img
+                                    src="{% static '/assets/images/administrator.png' %}" alt="user"
+                                    width="50"></span>
+                            </div>
+                            <div class="comment-text w-100">
+                                <h5>Administrator</h5>
+                                <div class="comment-footer">
+                                    <span class="date">03 Agustus 2020</span>
+                                    <span class="label label-success">Approved</span>
+                                </div>
+                                <p class="m-b-5 m-t-10">
+                                    Perubahan pada Excel Format untuk string true dan false menjadi huruf kapital
+                                </p>
+                            </div>
+                        </div>
+                        <!-- Comment Row -->
+                        <div class="d-flex flex-row comment-row">
+                            <div class="p-2"><span class="round"><img
+                                    src="{% static '/assets/images/administrator.png' %}" alt="user"
+                                    width="50"></span>
+                            </div>
+                            <div class="comment-text w-100">
+                                <h5>Administrator</h5>
+                                <div class="comment-footer">
+                                    <span class="date">30 Juli 2020</span>
+                                    <span class="label label-success">Approved</span>
+                                </div>
+                                <p class="m-b-5 m-t-10">
+                                    Penambahan menu untuk pengusulan penerima bantuan pada menu desa
+                                </p>
+                            </div>
+                        </div>
+                        <!-- Comment Row -->
+                        <div class="d-flex flex-row comment-row">
+                            <div class="p-2"><span class="round"><img
+                                    src="{% static '/assets/images/administrator.png' %}" alt="user"
+                                    width="50"></span>
+                            </div>
+                            <div class="comment-text w-100">
+                                <h5>Administrator</h5>
+                                <div class="comment-footer">
+                                    <span class="date">22 Juli 2020</span>
+                                    <span class="label label-success">Approved</span>
+                                </div>
+                                <p class="m-b-5 m-t-10">
+                                    Excel Format hanya menampilkan data NIK Aktif, NIK Non Aktif hanya akan tampil pada
+                                    menu
+                                    Kependudukan NIK Non Aktif
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

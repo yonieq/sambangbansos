@@ -1,0 +1,80 @@
+{% extends 'management/base.html' %}
+{% load static %}
+
+{% block pagetitle %}
+    Check NIK Aktif
+{% endblock %}
+
+{% block pagelink %}
+    <li class="breadcrumb-item"><a href="{% url 'ManagementDashboard' %}">Home</a></li>
+    <li class="breadcrumb-item active">Check NIK</li>
+{% endblock %}
+
+{% block bodycontent %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+{#                    <form action="" method="post">#}
+                        {% csrf_token %}
+{#                        <div class="form-body">#}
+{#                            <h3 class="box-title">Check NIK</h3>#}
+{#                            <hr>#}
+{#                            <!--/row-->#}
+{#                            <div class="row">#}
+{#                                <div class="col-md-12">#}
+{#                                    <div class="form-group">#}
+{#                                        <input type="text" class="form-control" name="nomer">#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <!--/span-->#}
+{##}
+{#                            </div>#}
+{#                            <div class="form-actions">#}
+{#                                <button type="submit" class="btn btn-success"><i#}
+{#                                        class="fa fa-search"></i> Search#}
+{#                                </button>#}
+{#                                <button type="button" class="btn btn-inverse">Cancel</button>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </form>#}
+                    <div class="table-responsive m-t-40">
+                        <table id="dataTable" class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>Nik</th>
+                                <th>Nama</th>
+                                <th>Alamat</th>
+                                <th>Rt</th>
+                                <th>Rw</th>
+                                <th>Status</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for warga in list %}
+                                <tr>
+                                    <td>{{ warga.Nik }}</td>
+                                    <td>{{ warga.Nama }}</td>
+                                    <td>{{ warga.Alamat }}</td>
+                                    <td>{{ warga.Rt }}</td>
+                                    <td>{{ warga.Rw }}</td>
+                                    <td>{{ warga.NikValid }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block jsfooter %}
+    <script src="{% static "/assets/plugins/datatables/jquery.dataTables.min.js" %}"></script>
+    <script>
+        $(document).ready(function () {
+            $('#dataTable').DataTable();
+        });
+    </script>
+{% endblock %}

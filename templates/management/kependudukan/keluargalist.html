@@ -1,0 +1,95 @@
+{% extends 'management/base.html' %}
+{% load static %}
+
+{% block pagetitle %}
+    Data Keluarga
+{% endblock %}
+
+{% block pagelink %}
+    <li class="breadcrumb-item"><a href="{% url 'ManagementDashboard' %}">Home</a></li>
+    <li class="breadcrumb-item active">Keluarga</li>
+{% endblock %}
+
+{% block bodycontent %}
+    <div class="row" method="post">
+        <div class="col-12">
+            <div class="card">
+            {% include 'management/messages.html' %}
+            </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="dataTable" class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>Nomer KK</th>
+                                <th>Alamat</th>
+                                <th>Rt</th>
+                                <th>Rw</th>
+                                <th>Desa</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for keluarga in list %}
+                                <tr>
+                                    <td>{{ keluarga.NomerKK }}</td>
+                                    <td>{{ keluarga.Alamat }}</td>
+                                    <td>{{ keluarga.Rt }}</td>
+                                    <td>{{ keluarga.Rw }}</td>
+                                    <td>{{ keluarga.Desa.Nama }}</td>
+                                    <td>
+                                        <a href="{% url 'KependudukanKeluargaFormsUpdate' keluarga.id %}"
+                                           data-toggle="tooltip" data-original-title="Edit"> <i
+                                                class="fa fa-pencil text-wrap"></i> </a>
+                                        <a href="{% url 'KependudukanKeluargaDelete' keluarga.id %}"
+                                           data-toggle="tooltip" data-original-title="Delete"> <i
+                                                class="fa fa-close text-danger"></i></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block jsfooter %}
+    <script src="{% static "/assets/plugins/datatables/jquery.dataTables.min.js" %}"></script>
+    <script src="{% static "/assets/plugins/datatables/button-export/dataTables.buttons.min.js" %}"></script>
+    <script src="{% static "/assets/plugins/datatables/button-export/buttons.flash.min.js" %}"></script>
+    <script src="{% static "/assets/plugins/datatables/button-export/jszip.min.js" %}"></script>
+    <script src="{% static "/assets/plugins/datatables/button-export/pdfmake.min.js" %}"></script>
+    <script src="{% static "/assets/plugins/datatables/button-export/vfs_fonts.js" %}"></script>
+    <script src="{% static "/assets/plugins/datatables/button-export/buttons.html5.min.js" %}"></script>
+    <script src="{% static "/assets/plugins/datatables/button-export/buttons.print.min.js" %}"></script>
+
+    <script>
+        $(document).ready(function () {
+            //$('#dataTable').DataTable();
+            const table = $('#dataTable').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        text: '<i class="fa fa-plus"></i> Data',
+                        action: function (e, dt, node, config) {
+                            //alert( 'Button activated' );
+                            window.location.href = "{% url 'KependudukanKeluargaFormsInsert'%}"
+                        }
+                    },
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
+            });
+            table.button(0).nodes().css('background', 'green');
+        });
+    </script>
+    <script>
+        setTimeout(function () {
+            if ($('#msg').length > 0) {
+                $('#msg').remove();
+            }
+        }, 5000)
+    </script>
+{% endblock %}

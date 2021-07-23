@@ -1,0 +1,61 @@
+{% extends 'management/base.html' %}
+{% load static %}
+
+{% block pagetitle %}
+    Data Penerima Bantuan
+{% endblock %}
+
+{% block pagelink %}
+    <li class="breadcrumb-item"><a href="{% url 'ManagementDashboard' %}">Home</a></li>
+    <li class="breadcrumb-item active">Penerima Bantuan</li>
+{% endblock %}
+
+{% block bodycontent %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="dataTable" class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>Nama</th>
+                                <th>Nomer KK</th>
+                                <th>Alamat</th>
+                                <th>Rt</th>
+                                <th>Rw</th>
+                                <th>Desa</th>
+{#                                <th>Status</th>#}
+{#                                <th>Action</th>#}
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for warga in list %}
+                                <tr>
+                                    <td>{{ warga.Nama }}</td>
+                                    <td>{{ warga.Keluarga }}</td>
+                                    <td>{{ warga.Alamat }}</td>
+                                    <td>{{ warga.Rt }}</td>
+                                    <td>{{ warga.Rw }}</td>
+                                    <td>{{ warga.Desa.Nama }}</td>
+{#                                    <td>{{ warga.Status }}</td>#}
+{#                                    <td><a href="{% url 'DataBantuanDetailList' keluarga.id %}">Detail</a></td>#}
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block jsfooter %}
+    <script src="{% static "/assets/plugins/datatables/jquery.dataTables.min.js" %}"></script>
+    <script>
+        $(document).ready(function () {
+            $('#dataTable').DataTable();
+        });
+    </script>
+{% endblock %}

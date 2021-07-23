@@ -1,0 +1,88 @@
+{% extends 'management/base.html' %}
+{% load static %}
+
+{% block pagetitle %}
+    Pencarian
+{% endblock %}
+
+{% block pagelink %}
+    <li class="breadcrumb-item"><a href="{% url 'ManagementDashboard' %}">Home</a></li>
+    <li class="breadcrumb-item active">Pencarian</li>
+{% endblock %}
+
+{% block bodycontent %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <div class="form-body">
+                            <h3 class="box-title">Data Pencarian</h3>
+                            <hr>
+                            <!--/row-->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="nomer">
+                                    </div>
+                                </div>
+                                <!--/span-->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <select class="form-control custom-select" name="searchby">
+                                            <option>--Search by--</option>
+                                            <option value="bynik">NIK</option>
+                                            <option value="nbykk">Nomer KK</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-success"><i class="fa fa-search"></i> Search
+                                </button>
+                                <button type="button" class="btn btn-inverse">Cancel</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="table-responsive m-t-40">
+                        <table id="dataTable" class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>Nomer KK</th>
+                                <th>Alamat</th>
+                                <th>Rt</th>
+                                <th>Rw</th>
+                                <th>Desa</th>
+                                <th>Bantuan</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for bantuan in list %}
+                                <tr>
+                                    <td>{{ bantuan.Keluarga.NomerKK }}</td>
+                                    <td>{{ bantuan.Keluarga.Alamat }}</td>
+                                    <td>{{ bantuan.Keluarga.Rt }}</td>
+                                    <td>{{ bantuan.Keluarga.Rw }}</td>
+                                    <td>{{ bantuan.Keluarga.Desa.Nama }}</td>
+                                    <td>{{ bantuan.Bantuan.Nama }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block jsfooter %}
+    <script src="{% static "/assets/plugins/datatables/jquery.dataTables.min.js" %}"></script>
+    <script>
+        $(document).ready(function () {
+            $('#dataTable').DataTable();
+        });
+    </script>
+{% endblock %}
